@@ -1,6 +1,6 @@
-require 'minitest.autorun'
-require 'minitest.pride'
-require'./lib/key'
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/key'
 
 class KeyTest < Minitest::Test
 
@@ -12,7 +12,11 @@ class KeyTest < Minitest::Test
     assert_instance_of Key, @random_key
   end
 
-  def test_random_key_can_be_split
-    assert 1 > 0
+  def test_generate_key_method
+    assert_equal 5, @random_key.key.length
   end
+
+  # def test_random_key_can_be_split
+  #   assert > 0
+  # end
 end

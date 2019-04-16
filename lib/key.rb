@@ -2,6 +2,7 @@ require 'pry'
 class Key
   attr_reader :key
 
+
   def initialize
     @key = generate_key.to_s
   end
