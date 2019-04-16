@@ -12,8 +12,12 @@ class KeyTest < Minitest::Test
     assert_instance_of Key, @random_key
   end
 
-  def test_generate_key_method
+  def test_generate_key_method_length_of_key
     assert_equal 5, @random_key.key.length
+  end
+
+  def test_split_key_method
+    
   end
 
   # def test_random_key_can_be_split
