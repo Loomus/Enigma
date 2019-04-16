@@ -11,4 +11,8 @@ class OffsetTest < Minitest::Test
   def test_offset_class_exists
     assert_instance_of Offset, @offset
   end
+
+  def test_get_offset_method
+    assert_equal "1025", @offset.get_offset("040895")
+  end
 end
