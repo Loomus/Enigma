@@ -1,10 +1,8 @@
-require 'minitest/autorun'
-require 'minitest/pride'
 require './lib/enigma'
 require './lib/offset'
 require './lib/key'
 
-read_file, write_file  = ARGV
+read_file, write_file = ARGV
 
 messages = File.open(read_file, "r")
 encrypted = File.open(write_file, "w")

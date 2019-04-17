@@ -1,7 +1,3 @@
-require './lib/offset'
-require './lib/key'
-require 'pry'
-
 class Enigma
   attr_reader :alphabet
 
@@ -10,7 +6,6 @@ class Enigma
   end
 
   def encrypt(message, key = random_key, date = Time.now.strftime("%d%m%y"))
-# binding.pry
     return {
       encryption: offset_message(message, key, date, 1),
       key: key,
