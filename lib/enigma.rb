@@ -3,8 +3,11 @@ require './lib/key'
 require 'pry'
 
 class Enigma
-  # take message, offset message with date, that is split into offset
-  alphabet = ( "a".."z").to_a << " "
+  attr_reader :alphabet
+  
+  def initialize
+    @alphabet = ( "a".."z").to_a << " "
+  end
 
   def encrypt(message, key, date)
     offset = Offset.new(date)
@@ -13,6 +16,14 @@ class Enigma
   end
 
   def offset_letter(letter, offset)
+    start = 0
+    @alphabet.each do |place|
+      if place == letter
+        break
+      end
+      start += 1
+    end
+    p start
     p letter
     p offset
   end
