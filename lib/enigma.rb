@@ -11,13 +11,32 @@ class Enigma
 
   def encrypt(message, key, date)
     offset = Offset.new(date)
-    key = Key.new(key)
+    keys = Key.new(key)
     encryption = ""
     message.split('').each do |letter|
-      encryption += offset_letter(letter, key.key[encryption.length % 4].to_i + offset.offsets[encryption.length % 4].to_i)
+      encryption += offset_letter(letter, keys.key[encryption.length % 4].to_i + offset.offsets[encryption.length % 4].to_i)
     end
-    p encryption
+    return {
+      encryption: encryption,
+      key: key,
+      date: date
+  }
   end
+
+  def decrypt(message, key, date)
+    offset = Offset.new(date)
+    keys = Key.new(key)
+    decryption = ""
+    message.split('').each do |letter|
+      decryption += offset_letter(letter, (keys.key[decryption.length % 4].to_i + offset.offsets[decryption.length % 4].to_i) * -1)
+    end
+    return {
+      decryption: decryption,
+      key: key,
+      date: date
+  }
+  end
+
 
   def offset_letter(letter, offset)
     start = get_letter_index(letter)
