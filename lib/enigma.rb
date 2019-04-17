@@ -4,7 +4,7 @@ require 'pry'
 
 class Enigma
   attr_reader :alphabet
-  
+
   def initialize
     @alphabet = ( "a".."z").to_a << " "
   end
@@ -12,20 +12,26 @@ class Enigma
   def encrypt(message, key, date)
     offset = Offset.new(date)
     key = Key.new(key)
-    offset_letter(message[0], key.key[0].to_i + offset.offsets[0].to_i)
+    index = 0
+    message.split('').each do |letter|
+      p offset_letter(letter, key.key[index % 4].to_i + offset.offsets[index % 4].to_i)
+      index += 1
+    end
   end
 
   def offset_letter(letter, offset)
+    start = get_letter_index(letter)
+    @alphabet[(start + offset) % 27]
+  end
+
+  def get_letter_index(letter)
     start = 0
     @alphabet.each do |place|
       if place == letter
-        break
+        return start
       end
       start += 1
     end
-    p start
-    p letter
-    p offset
   end
 end
 e = Enigma.new

@@ -26,5 +26,5 @@ class Key
   # end
 end
 
-@new_key = Key.new("02715")
-p @new_key.key
+# @new_key = Key.new("02715")
+# @new_key.key
