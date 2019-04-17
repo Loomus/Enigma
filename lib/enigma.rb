@@ -10,33 +10,30 @@ class Enigma
   end
 
   def encrypt(message, key, date)
-    offset = Offset.new(date)
-    keys = Key.new(key)
-    encryption = ""
-    message.split('').each do |letter|
-      encryption += offset_letter(letter, keys.key[encryption.length % 4].to_i + offset.offsets[encryption.length % 4].to_i)
-    end
     return {
-      encryption: encryption,
+      encryption: offset_message(message, key, date, 1),
       key: key,
       date: date
   }
+  end
+
+  def offset_message(message, key, date, direction)
+    offset = Offset.new(date)
+    keys = Key.new(key)
+    mod_message = ""
+    message.split('').each do |letter|
+      mod_message += offset_letter(letter, (keys.key[mod_message.length % 4].to_i + offset.offsets[mod_message.length % 4].to_i) * direction)
+    end
+    mod_message
   end
 
   def decrypt(message, key, date)
-    offset = Offset.new(date)
-    keys = Key.new(key)
-    decryption = ""
-    message.split('').each do |letter|
-      decryption += offset_letter(letter, (keys.key[decryption.length % 4].to_i + offset.offsets[decryption.length % 4].to_i) * -1)
-    end
     return {
-      decryption: decryption,
+      decryption: offset_message(message, key, date, -1),
       key: key,
       date: date
   }
   end
-
 
   def offset_letter(letter, offset)
     start = get_letter_index(letter)
@@ -53,11 +50,3 @@ class Enigma
     end
   end
 end
-e = Enigma.new
-e.encrypt("hello world", "02715", "040895")
-
-
-# message.chars.each_slice(4) do |string|
-#   alphabet.index
-#   binding.pry
-# end
