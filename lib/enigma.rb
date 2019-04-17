@@ -9,7 +9,7 @@ class Enigma
     @alphabet = ( "a".."z").to_a << " "
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message, key, date = Time.now.strftime("%d%m%y"))
     return {
       encryption: offset_message(message, key, date, 1),
       key: key,
@@ -27,7 +27,7 @@ class Enigma
     mod_message
   end
 
-  def decrypt(message, key, date)
+  def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
     return {
       decryption: offset_message(message, key, date, -1),
       key: key,
