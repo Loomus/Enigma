@@ -9,7 +9,8 @@ class Enigma
     @alphabet = ( "a".."z").to_a << " "
   end
 
-  def encrypt(message, key = rand(10000..99999), date = Time.now.strftime("%d%m%y"))
+  def encrypt(message, key = random_key, date = Time.now.strftime("%d%m%y"))
+# binding.pry
     return {
       encryption: offset_message(message, key, date, 1),
       key: key,
@@ -17,17 +18,22 @@ class Enigma
   }
   end
 
+  def random_key
+    new_key = 'OOOO' + rand(0..99999).to_s
+    new_key[-5..-1]
+  end
+
   def offset_message(message, key, date, direction)
-    offset = Offset.new(date)
+    @offset = Offset.new(date)
     keys = Key.new(key)
     mod_message = ""
     message.split('').each do |letter|
-      mod_message += offset_letter(letter, (keys.key[mod_message.length % 4].to_i + offset.offsets[mod_message.length % 4].to_i) * direction)
+      mod_message += offset_letter(letter, (keys.key[mod_message.length % 4].to_i + @offset.offsets[mod_message.length % 4].to_i) * direction)
     end
     mod_message
   end
 
-  def decrypt(message, key = rand(10000..99999), date = Time.now.strftime("%d%m%y"))
+  def decrypt(message, key = Key.new, date = Time.now.strftime("%d%m%y"))
     return {
       decryption: offset_message(message, key, date, -1),
       key: key,
