@@ -1,18 +1,16 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/offset'
+require './test/test_helper'
 
 class OffsetTest < Minitest::Test
 
   def setup
-    @offset = Offset.new
+    @offset = Offset.new("141499")
   end
 
   def test_offset_class_exists
     assert_instance_of Offset, @offset
   end
 
-  def test_get_offset_method
-    assert_equal "1025", @offset.set_offset("040895")
+  def test_returns_offset
+    assert_equal ["7", "0", "0", "1"], @offset.offsets
   end
 end
