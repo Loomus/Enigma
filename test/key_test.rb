@@ -3,7 +3,7 @@ require './test/test_helper'
 class KeyTest < Minitest::Test
 
   def setup
-    @random_key = Key.new("string")
+    @random_key = Key.new("03728")
   end
 
   def test_key_class_exists
