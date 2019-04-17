@@ -17,10 +17,6 @@ class KeyTest < Minitest::Test
   end
 
   def test_split_key_method
-    
-  end
 
-  # def test_random_key_can_be_split
-  #   assert > 0
-  # end
+  end
 end

@@ -13,6 +13,6 @@ class OffsetTest < Minitest::Test
   end
 
   def test_get_offset_method
-    assert_equal "1025", @offset.get_offset("040895")
+    assert_equal "1025", @offset.set_offset("040895")
   end
 end
