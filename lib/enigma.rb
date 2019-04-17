@@ -9,7 +9,7 @@ class Enigma
     @alphabet = ( "a".."z").to_a << " "
   end
 
-  def encrypt(message, key, date = Time.now.strftime("%d%m%y"))
+  def encrypt(message, key = rand(10000..99999), date = Time.now.strftime("%d%m%y"))
     return {
       encryption: offset_message(message, key, date, 1),
       key: key,
@@ -27,7 +27,7 @@ class Enigma
     mod_message
   end
 
-  def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
+  def decrypt(message, key = rand(10000..99999), date = Time.now.strftime("%d%m%y"))
     return {
       decryption: offset_message(message, key, date, -1),
       key: key,
@@ -36,8 +36,12 @@ class Enigma
   end
 
   def offset_letter(letter, offset)
-    start = get_letter_index(letter)
-    @alphabet[(start + offset) % 27]
+    start = get_letter_index(letter.downcase)
+    if start >= 0 && start < 27
+      @alphabet[(start + offset) % 27]
+    else
+      letter
+    end
   end
 
   def get_letter_index(letter)
@@ -48,5 +52,6 @@ class Enigma
       end
       start += 1
     end
+    return start
   end
 end

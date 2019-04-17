@@ -6,5 +6,3 @@ class Offset
     @offsets = squared_numeric.to_s[-4..-1].split("")
   end
 end
-# o = Offset.new("040895")
-# p o.offsets
